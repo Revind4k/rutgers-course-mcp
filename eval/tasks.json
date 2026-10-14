@@ -1,0 +1,172 @@
+[
+  {
+    "id": "credits-198:211",
+    "category": "lookup",
+    "question": "How many credits is 01:198:211 worth in Fall 2026? Reply with the number.",
+    "mustInclude": [
+      "4"
+    ]
+  },
+  {
+    "id": "credits-198:344",
+    "category": "lookup",
+    "question": "How many credits is 01:198:344 worth in Fall 2026? Reply with the number.",
+    "mustInclude": [
+      "4"
+    ]
+  },
+  {
+    "id": "credits-640:250",
+    "category": "lookup",
+    "question": "How many credits is 01:640:250 worth in Fall 2026? Reply with the number.",
+    "mustInclude": [
+      "3"
+    ]
+  },
+  {
+    "id": "prereq-198:211",
+    "category": "lookup",
+    "question": "What are the prerequisites for Computer Architecture (01:198:211)?",
+    "mustInclude": [
+      "01:198:112"
+    ]
+  },
+  {
+    "id": "title-198:336",
+    "category": "lookup",
+    "question": "What is the course title of 01:198:336?",
+    "mustInclude": [
+      "PRINCIPLES"
+    ]
+  },
+  {
+    "id": "open-sections-198:211",
+    "category": "sections",
+    "question": "List the index numbers of every open section of 01:198:211 in Fall 2026.",
+    "mustInclude": [
+      "11548",
+      "11549",
+      "11550",
+      "11551",
+      "11552",
+      "11553",
+      "11554"
+    ]
+  },
+  {
+    "id": "open-sections-198:213",
+    "category": "sections",
+    "question": "List the index numbers of every open section of 01:198:213 in Fall 2026.",
+    "mustInclude": [
+      "11565"
+    ]
+  },
+  {
+    "id": "instructor-by-index",
+    "category": "sections",
+    "question": "Who teaches section index 11548 in Fall 2026?",
+    "mustInclude": [
+      "FIRNER"
+    ]
+  },
+  {
+    "id": "count-sections-198:211",
+    "category": "sections",
+    "question": "How many sections of Computer Architecture (01:198:211) are offered in Fall 2026, and how many are open? Reply as '<total> total, <open> open'.",
+    "mustInclude": [
+      "11 total",
+      "7 open"
+    ]
+  },
+  {
+    "id": "is-open-closed",
+    "category": "sections",
+    "question": "Is section index 11556 open right now? Answer YES or NO first.",
+    "startsWith": "NO",
+    "mustInclude": []
+  },
+  {
+    "id": "find-by-title",
+    "category": "search",
+    "question": "What is the course number for Data Structures in the Computer Science department?",
+    "mustInclude": [
+      "01:198:112"
+    ]
+  },
+  {
+    "id": "search-ml",
+    "category": "search",
+    "question": "Which Computer Science courses in Fall 2026 have 'machine learning' in the title? List their course strings.",
+    "mustInclude": [
+      "01:198:461",
+      "16:198:535",
+      "16:198:536"
+    ]
+  },
+  {
+    "id": "subject-code",
+    "category": "search",
+    "question": "What is the subject code for Statistics at Rutgers New Brunswick?",
+    "mustInclude": [
+      "954"
+    ]
+  },
+  {
+    "id": "core-code-count",
+    "category": "search",
+    "question": "How many Mathematics (subject 640) courses satisfy the QQ core requirement in Fall 2026? Reply with the number.",
+    "mustInclude": [
+      "10"
+    ]
+  },
+  {
+    "id": "conflict-11548-11565",
+    "category": "schedule",
+    "question": "Can I take section 11548 and section 11565 together without a time conflict? Answer YES or NO first.",
+    "startsWith": "NO",
+    "mustInclude": []
+  },
+  {
+    "id": "conflict-11549-13051",
+    "category": "schedule",
+    "question": "Can I take section 11549 and section 13051 together without a time conflict? Answer YES or NO first.",
+    "startsWith": "YES",
+    "mustInclude": []
+  },
+  {
+    "id": "conflict-11550-13051",
+    "category": "schedule",
+    "question": "Can I take section 11550 and section 13051 together without a time conflict? Answer YES or NO first.",
+    "startsWith": "YES",
+    "mustInclude": []
+  },
+  {
+    "id": "transient-timeout-recovers",
+    "category": "failure",
+    "question": "How many credits is 01:198:211? Reply with the number.",
+    "mustInclude": [
+      "4"
+    ],
+    "fault": "timeout:3"
+  },
+  {
+    "id": "outage-no-guessing",
+    "category": "failure",
+    "question": "How many open sections does 01:198:211 have right now?",
+    "mustInclude": [
+      "unavailable|down|could not|couldn't|unable|can't|cannot|timed out|won't guess"
+    ],
+    "mustNotInclude": [
+      "7 open"
+    ],
+    "fault": "timeout:99"
+  },
+  {
+    "id": "not-offered",
+    "category": "failure",
+    "question": "Who teaches 01:198:999 in Fall 2026?",
+    "mustInclude": [
+      "not offered|isn't offered|no course|not found|does not exist|doesn't exist|not listed|isn't listed"
+    ]
+  }
+]

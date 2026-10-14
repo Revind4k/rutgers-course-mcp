@@ -1,0 +1,4 @@
+node_modules/
+eval/results/*.json
+!eval/results/.gitkeep
+.env
