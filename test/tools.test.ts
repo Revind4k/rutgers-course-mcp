@@ -60,6 +60,52 @@ describe("findConflicts", () => {
     expect(r.conflict_free).toBe(false);
     expect(r.unknown_indexes).toEqual(["00000", "99999"]);
   });
+
+  // Hand-built sections so the boundary cases don't depend on what the fixture term happens to contain.
+  const meet = (day: string, start: string, end: string) => ({
+    meetingDay: day, startTimeMilitary: start, endTimeMilitary: end,
+    campusName: "BUSCH", buildingCode: "HLL", roomNumber: "114", meetingModeDesc: "LEC",
+  });
+  const course = (code: string, index: string, ...meetingTimes: ReturnType<typeof meet>[]): Course => ({
+    courseString: code, title: code, subject: code.split(":")[1], subjectDescription: "", courseNumber: code.split(":")[2],
+    credits: 4, level: "U", preReqNotes: "", coreCodes: [],
+    sections: [{ index, number: "01", openStatus: true, instructors: [], meetingTimes }],
+  });
+
+  it("treats back-to-back sections (one ends the same minute the next starts) as conflict-free", () => {
+    const r = T.findConflicts(
+      [course("01:198:211", "10001", meet("M", "1020", "1140")), course("01:198:344", "10002", meet("M", "1140", "1300"))],
+      ["10001", "10002"],
+    );
+    expect(r).toEqual({ conflict_free: true, conflicts: [], unknown_indexes: [] });
+  });
+
+  it("flags a one-minute overlap and reports its length", () => {
+    const r = T.findConflicts(
+      [course("01:198:211", "10001", meet("M", "1020", "1141")), course("01:198:344", "10002", meet("M", "1140", "1300"))],
+      ["10001", "10002"],
+    );
+    expect(r.conflict_free).toBe(false);
+    expect(r.conflicts).toEqual([
+      { a: "10001 (01:198:211)", b: "10002 (01:198:344)", day: "Mon", overlap: "1 min" },
+    ]);
+  });
+
+  it("only compares meetings on the same day", () => {
+    const r = T.findConflicts(
+      [course("01:198:211", "10001", meet("M", "1020", "1140")), course("01:198:344", "10002", meet("W", "1020", "1140"))],
+      ["10001", "10002"],
+    );
+    expect(r.conflict_free).toBe(true);
+  });
+
+  it("never counts a meeting with no fixed day (online / by arrangement) as a conflict", () => {
+    const r = T.findConflicts(
+      [course("01:198:211", "10001", meet("", "", "")), course("01:198:344", "10002", meet("M", "1020", "1140"))],
+      ["10001", "10002"],
+    );
+    expect(r.conflict_free).toBe(true);
+  });
 });
 
 describe("SocClient fault handling", () => {
